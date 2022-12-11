@@ -1,8 +1,8 @@
 axios({
 	url: 'https://cors-proxy.org/api/',
-	method: 'get',
+	method: 'post',
 	headers: {
-		'cors-proxy-url' : 'https://ssw-final-poject.netlify.app/' // 이 부분을 이용하는 서버 URL로 변경
+		'cors-proxy-url' : 'https://ssw-final-poject.netlify.app' // 이 부분을 이용하는 서버 URL로 변경
 	},
 }).then((res) => {
 	console.log(res.data);
