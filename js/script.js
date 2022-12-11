@@ -1,3 +1,13 @@
+axios({
+	url: 'https://cors-proxy.org/api/',
+	method: 'get',
+	headers: {
+		'cors-proxy-url' : 'https://ssw-final-poject.netlify.app/' // 이 부분을 이용하는 서버 URL로 변경
+	},
+}).then((res) => {
+	console.log(res.data);
+})
+
 var __ajax_count__ = 0;
 
 var fn_comm_ajax = function(url, options) {
