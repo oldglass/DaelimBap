@@ -120,20 +120,53 @@ this.fn_comm_ajaxError = function(jqXHR, textStatus, errorThrown) {
 
 let today = new Date();
 let num_list =[1, 3, 6, 7, 9];
-let inputDate = today.getFullYear() + '/' + ('0' + (today.getMonth() + 1)).slice(-2) + '/' + ('0' + (today.getDate())).slice(-2);
+let inputDate = today.getFullYear() + '.' + ('0' + (today.getMonth() + 1)).slice(-2) + '.' + ('0' + (today.getDate())).slice(-2);
 
 const url = 'https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do'
 
-fetch(`https://cors-anywhere.herokuapp.com/${url}`)
-    .then((response) => response.text())
-    .then((data) => {
-		$("#sendForm input:hidden[name=START_DAY]").val(inputDate);
-		fn_list();
-		$("#sendForm input:hidden[name=BISTRO_SEQ]").val(2);
-		fn_list();
-	});
+/* fetch(`https://cors-anywhere.herokuapp.com/${url}`, {
+	method: 'POST',
+	headers: {"Content-Type": "application/json"}, 
+	body: JSON.stringify($("#sendForm").serialize()),
+}).then(data => {
+	if(data != null && data != "") {
+		if (data.BISTRO_SEQ == 1) {
+			for (let i = 0; i < num_list.length; i++) {
+				setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, -1);
+				setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, today.getDay());
+			}
+			
+		} else if (data.BISTRO_SEQ == 2) {
+			for (let i = 1; i <= 2; i++) {
+				setTableData(data, data.BISTRO_SEQ, i, i, -1);
+				setTableData(data, data.BISTRO_SEQ, i, i, today.getDay());
+			}
+		}
+	}
+}); */
 
 function fn_list() {
+
+	// fetch(`https://cors-anywhere.herokuapp.com/${url}`, {
+	// method: 'POST', 
+	// headers: {"Content-Type": "application/json"}, 
+	// body: JSON.stringify($("#sendForm").serialize()),
+	// }).then(data => {
+	// 	if(data != null && data != "") {
+	// 		if (data.BISTRO_SEQ == 1) {
+	// 			for (let i = 0; i < num_list.length; i++) {
+	// 				setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, -1);
+	// 				setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, today.getDay());
+	// 			}
+				
+	// 		} else if (data.BISTRO_SEQ == 2) {
+	// 			for (let i = 1; i <= 2; i++) {
+	// 				setTableData(data, data.BISTRO_SEQ, i, i, -1);
+	// 				setTableData(data, data.BISTRO_SEQ, i, i, today.getDay());
+	// 			}
+	// 		}
+	// 	}
+	// });
 	fn_comm_ajax({
 		url : "https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do",
         data : $("#sendForm").serialize(),
@@ -172,10 +205,10 @@ function setTableData(data, bistro, num, num2, day) {
 }
 
 
-// $("#sendForm input:hidden[name=START_DAY]").val(inputDate);
-// fn_list();
-// $("#sendForm input:hidden[name=BISTRO_SEQ]").val(2);
-// fn_list();
+$("#sendForm input:hidden[name=START_DAY]").val(inputDate);
+fn_list();
+$("#sendForm input:hidden[name=BISTRO_SEQ]").val(2);
+fn_list();
 
 
 const headerEl = document.querySelector("header");
