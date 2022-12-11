@@ -120,12 +120,18 @@ this.fn_comm_ajaxError = function(jqXHR, textStatus, errorThrown) {
 
 let today = new Date();
 let num_list =[1, 3, 6, 7, 9];
+let inputDate = today.getFullYear() + '/' + ('0' + (today.getMonth() + 1)).slice(-2) + '/' + ('0' + (today.getDate())).slice(-2);
 
-const url = 'https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do' // 이 부분을 이용하는 서버 URL로 변경
- 
+const url = 'https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do'
+
 fetch(`https://cors-anywhere.herokuapp.com/${url}`)
     .then((response) => response.text())
-    .then((data) => console.log(data));
+    .then((data) => {
+		$("#sendForm input:hidden[name=START_DAY]").val(inputDate);
+		fn_list();
+		$("#sendForm input:hidden[name=BISTRO_SEQ]").val(2);
+		fn_list();
+	});
 
 function fn_list() {
 	fn_comm_ajax({
@@ -165,12 +171,11 @@ function setTableData(data, bistro, num, num2, day) {
 	}
 }
 
-let inputDate = today.getFullYear() + '/' + ('0' + (today.getMonth() + 1)).slice(-2) + '/' + ('0' + (today.getDate())).slice(-2);
 
-$("#sendForm input:hidden[name=START_DAY]").val(inputDate);
-fn_list();
-$("#sendForm input:hidden[name=BISTRO_SEQ]").val(2);
-fn_list();
+// $("#sendForm input:hidden[name=START_DAY]").val(inputDate);
+// fn_list();
+// $("#sendForm input:hidden[name=BISTRO_SEQ]").val(2);
+// fn_list();
 
 
 const headerEl = document.querySelector("header");
