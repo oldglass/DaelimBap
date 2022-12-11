@@ -1,8 +1,9 @@
-const url = 'https://ssw-final-project.netlify.app/' // 이 부분을 이용하는 서버 URL로 변경
+const url = 'https://www.daelim.ac.kr/' // 이 부분을 이용하는 서버 URL로 변경
  
 fetch(`https://proxy.cors.sh/${url}`)
     .then((response) => response.text())
     .then((data) => console.log(data));
+
 
 var __ajax_count__ = 0;
 
