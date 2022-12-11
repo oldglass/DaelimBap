@@ -1,11 +1,12 @@
-const url = 'https://www.daelim.ac.kr/' // 이 부분을 이용하는 서버 URL로 변경
- 
-fetch(`https://proxy.cors.sh/${url}`)
-    .then((response) => response.text())
-    .then((data) => console.log(data));
-
-
-var __ajax_count__ = 0;
+axios({
+	url: 'https://cors-proxy.org/api/',
+	method: 'post',
+	headers: {
+		'cors-proxy-url' : 'https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do' // 이 부분을 이용하는 서버 URL로 변경
+	},
+}).then((res) => {
+	console.log(res.data);
+})
 
 var fn_comm_ajax = function(url, options) {
 	if (typeof url === "object") {
