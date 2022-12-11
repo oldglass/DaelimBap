@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>대림밥</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-section">
+                <h1>대림밥</h1>
+                <nav>
+                    <ul>
+                        <li>
+                            <button data-animation-scroll="true" data-target="#today_list">
+                                오늘의 학식
+                            </button>
+                            <button data-animation-scroll="true" data-target="#weekend_list">
+                                일주일 학식
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="main-section" id="today_list">
+            <main>
+                <h1>오늘의 학식</h1>
+                <div class="main-container">
+                    <input type="radio" id="main_student" name="tab1" checked>
+                    <label for="main_student">학생 식당</label>
+                    <input type="radio" id="main_staff" name="tab1">
+                    <label for="main_staff">교직원 식당</label>
+                    <div id="today_data_1" class="main-switch">
+                        <div class="main-mainmenu">
+                            <b>Corner 1</b>
+                            <p></p>
+                        </div>
+                        <div class="main-mainmenu">
+                            <b>Corner 3</b>
+                            <p></p>
+                        </div>
+                        <div class="main-sidemenu">
+                            <b>Corner 6</b>
+                            <p></p>
+                        </div>
+                        <div class="main-sidemenu">
+                            <b>Daelim Cook</b>
+                            <p></p>
+                        </div>
+                        <div class="main-sidemenu">
+                            <b>PLUS+</b>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div id="today_data_2" class="main-switch">
+                        <div class="main-staffmenu">
+                            <b>중식</b>
+                            <p></p>
+                        </div>
+                        <div class="main-staffmenu">
+                            <b>석식</b>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <aside>
+                <h2>오늘의 급식 순위</h2>
+                <div class="aside-container">
+                    <div class="ranking">
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <section id="weekend_list">
+            <h1>일주일 학식</h1>
+            <div class="weekend-container">
+                <input type="radio" name="tab2" id="section_student" checked>
+                <label for="section_student">학생 식당</label>
+                <input type="radio" name="tab2" id="section_staff">
+                <label for="section_staff">교직원 식당</label>
+                <form id="sendForm" method="post">
+                    <input type="hidden" name="BISTRO_SEQ" value="1"/>
+                    <input type="hidden" name="START_DAY" value=""/>
+                </form>
+                <div id="weekend_student" class="weekend">
+                    <table class="weekend-table">
+                        <colgroup>
+                            <col style="width: 10%">
+                            <col style="width: 18%">
+                            <col style="width: 18%">
+                            <col style="width: 18%">
+                            <col style="width: 18%">
+                            <col style="width: 18%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>코너 / 요일</th>
+                                <th>월요일</th>
+                                <th>화요일</th>
+                                <th>수요일</th>
+                                <th>목요일</th>
+                                <th>금요일</th>
+                            </tr>
+                        </thead>
+                        <tbody id="weekend_data_1">
+                            <tr>
+                                <th>Corner1</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <!-- <tr>
+                                <th>Corner2</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> -->
+                            <tr>
+                                <th>Corner3</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <!-- <tr>
+                                <th>Corner4</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Corner5</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> -->
+                            <tr>
+                                <th>Corner6</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>Daelim Cook</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <!-- <tr>
+                                <th>델리버스</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> -->
+                            <tr>
+                                <th>PLUS+</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="weekend_staff" class="weekend">
+                    <table class="weekend-table">
+                        <colgroup>
+                            <col style="width:10%">
+                            <col style="width:18%">
+                            <col style="width:18%">
+                            <col style="width:18%">
+                            <col style="width:18%">
+                            <col style="width:18%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>코너 / 요일</th>
+                            <th><b>월요일</b></th>
+                            <th><b>화요일</b></th>
+                            <th><b>수요일</b></th>
+                            <th><b>목요일</b></th>
+                            <th><b>금요일</b></th>
+                        </tr>
+                        </thead>
+                        <tbody id="weekend_data_2">
+                            <tr>
+                                <th>중식</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>석식</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>  
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
