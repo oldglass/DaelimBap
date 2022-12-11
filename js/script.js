@@ -1,32 +1,23 @@
-axios({
-	url: 'https://cors-proxy.org/api/',
-	method: 'post',
-	headers: {
-		'cors-proxy-url' : 'https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do' // 이 부분을 이용하는 서버 URL로 변경
-	},
-}).then((res) => {
-	console.log(res.data);
-})
 
 var fn_comm_ajax = function(url, options) {
 	if (typeof url === "object") {
 		options = url;
 		url = undefined;
 	}
-
+	
 	if (!options) {
 		$.ajax(url);
 		return;
 	}
-
+	
 	if (!options.dataType) {
 		options.dataType = "json";
 	}
-
+	
 	var pageId = options.pageId;
-
+	
 	if ((pageId != null && typeof (pageId) != 'undefined')
-			&& options.data != null && typeof (options.data) != 'undefined') {
+	&& options.data != null && typeof (options.data) != 'undefined') {
 
 		if (pageId == 'auto') {
 			if (svcName == null || typeof (svcName) == 'undefined') {
@@ -34,118 +25,124 @@ var fn_comm_ajax = function(url, options) {
 			}
 			pageId = svcName;
 		}
-
+		
 		fn_util_setCookie('PAGE_' + pageId, JSON
-				.stringify(fn_util_jsonFromGet(options.data)), null, '/');
+		.stringify(fn_util_jsonFromGet(options.data)), null, '/');
 	}
-
+	
 	if (options.success) {
 		options._success = options.success;
 	}
 	options.success = this.fn_comm_ajaxSuccess;
-
+	
 	if (options.error) {
 		options._error = options.error;
 	}
 	options.error = this.fn_comm_ajaxError;
-
+	
 	options.beforeSend = function(jqXHR, settings) {
 		jqXHR._success = settings._success;
 		jqXHR._error = settings._error;
-
+		
 		if (settings.parentIdForSetByName) {
 			jqXHR.parentIdForSetByName = settings.parentIdForSetByName;
 		}
 	};
-
+	
 	options.type = "POST";
-
+	
 	if (options.ajaxFormName) {
 		if ($.isPlainObject(options.data) || options.date == null) {
 			options.type = "POST";
 			$("#" + options.ajaxFormName)
-					.attr("enctype", "multipart/form-data");
+			.attr("enctype", "multipart/form-data");
 			$("#" + options.ajaxFormName).attr("action", url);
 			$("#" + options.ajaxFormName).ajaxForm(options);
 			$("#" + options.ajaxFormName).submit();
 		} else {
 			throw "options.data형식은 json형식이여야 합니다.";
 		}
-
+		
 	} else {
 		return $.ajax(url, options);
 	}
-
+	
 };
 
 var fn_comm_ajaxSuccess = function(data, textStatus, jqXHR) {
 	if (jqXHR.parentIdForSetByName) {
 		fn_comm_setValue(jqXHR.parentIdForSetByName, data.data);
 	}
-
+	
 	if (jqXHR._success) {
 		jqXHR._success.apply(this, [ data.data, textStatus, jqXHR ]);
 	}
 };
 
 this.fn_comm_ajaxError = function(jqXHR, textStatus, errorThrown) {
-
+	
 	var errmsg = "시스템에 오류가 발생했습니다.\n[오류메세지]\n" + textStatus + "\n"
-			+ errorThrown + "\n" + jqXHR.responseText;
-
+	+ errorThrown + "\n" + jqXHR.responseText;
+	
 	if (jqXHR._error) {
 		jqXHR._error.apply(this, [ jqXHR, textStatus, errorThrown ]);
 		return;
 	}
-
+	
 	var jsonStr = jqXHR.responseText;
 	var jsonObj = null;
-
+	
 	try {
 		jsonObj = $.parseJSON(jsonStr);
 	} catch (e) {
 		alert(errmsg);
 		return;
 	}
-
+	
 	errmsg = jsonObj.alertmsg;
-
+	
 	if (errmsg != undefined) {
 		alert(errmsg);
 		return;
 	}
-
+	
 	errmsg = jsonObj.errmsg;
 	errmsg = errmsg.replace("java.lang.RuntimeException: ", "");
-
+	
 	if (svcMode == "LOCAL") {
 		alert(errmsg);
 	} else {
 		location.href = contextPath + "/code500.jsp?comm_error_DOMAIN_CD="
-				+ encodeURIComponent(domainCd) + "&errmsg="
-				+ encodeURIComponent(errmsg);
+		+ encodeURIComponent(domainCd) + "&errmsg="
+		+ encodeURIComponent(errmsg);
 	}
 };
 
 let today = new Date();
 let num_list =[1, 3, 6, 7, 9];
 
+const url = 'https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do' // 이 부분을 이용하는 서버 URL로 변경
+ 
+fetch(`https://proxy.cors.sh/${url}`)
+    .then((response) => response.text())
+    .then((data) => console.log(data));
+
 function fn_list() {
-    fn_comm_ajax({
-        url : "https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do",
+	fn_comm_ajax({
+		url : "https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do",
         data : $("#sendForm").serialize(),
         dataType : "json",
         success : function(data) {
-            if(data != null && data != "") {
+			if(data != null && data != "") {
                 if (data.BISTRO_SEQ == 1) {
-                    for (let i = 0; i < num_list.length; i++) {
-                        setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, -1);
+					for (let i = 0; i < num_list.length; i++) {
+						setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, -1);
                         setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, today.getDay());
                     }
-
+					
                 } else if (data.BISTRO_SEQ == 2) {
-                    for (let i = 1; i <= 2; i++) {
-                        setTableData(data, data.BISTRO_SEQ, i, i, -1);
+					for (let i = 1; i <= 2; i++) {
+						setTableData(data, data.BISTRO_SEQ, i, i, -1);
                         setTableData(data, data.BISTRO_SEQ, i, i, today.getDay());
                     }
                 }
