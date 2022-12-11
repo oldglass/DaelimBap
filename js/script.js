@@ -123,7 +123,7 @@ let num_list =[1, 3, 6, 7, 9];
 
 const url = 'https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do' // 이 부분을 이용하는 서버 URL로 변경
  
-fetch(`https://proxy.cors.sh/${url}`)
+fetch(`https://cors-anywhere.herokuapp.com/${url}`)
     .then((response) => response.text())
     .then((data) => console.log(data));
 
