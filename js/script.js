@@ -1,5 +1,3 @@
-
-
 var __ajax_count__ = 0;
 
 var fn_comm_ajax = function(url, options) {
@@ -122,6 +120,7 @@ this.fn_comm_ajaxError = function(jqXHR, textStatus, errorThrown) {
 };
 
 let today = new Date();
+let num_list =[1, 3, 6, 7, 9];
 
 function fn_list() {
     fn_comm_ajax({
@@ -130,17 +129,16 @@ function fn_list() {
         dataType : "json",
         success : function(data) {
             if(data != null && data != "") {
-                let num_list =[1, 3, 6, 7, 9];
                 if (data.BISTRO_SEQ == 1) {
                     for (let i = 0; i < num_list.length; i++) {
-                        setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, 0);
-                        setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, i + 1);
+                        setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, -1);
+                        setTableData(data, data.BISTRO_SEQ, num_list[i], i + 1, today.getDay());
                     }
 
                 } else if (data.BISTRO_SEQ == 2) {
                     for (let i = 1; i <= 2; i++) {
-                        setTableData(data, data.BISTRO_SEQ, i, i, 0);
-                        setTableData(data, data.BISTRO_SEQ, i, i, i);
+                        setTableData(data, data.BISTRO_SEQ, i, i, -1);
+                        setTableData(data, data.BISTRO_SEQ, i, i, today.getDay());
                     }
                 }
             }
@@ -149,22 +147,26 @@ function fn_list() {
 }
 
 function setTableData(data, bistro, num, num2, day) {
-    if (day == 0) {
+    if (day == -1) {
         for (let i = 1; i <= 5; i++) {
             let foodData = eval(`data.CCT${i}${num}`);
             $(`#weekend_data_${bistro} tr:nth-child(${num2}) td:nth-child(${i + 1})`).html(foodData.replace(/\n/g,"<br>"));
         }
-    } else {
+    } else if (day >= 1 && day <=5) {
         let foodData = eval(`data.CCT${day}${num}`);
         $(`#today_data_${bistro} div:nth-child(${num2}) p`).html(foodData.replace(/\n/g,"<br>"));
-    }
+    } else {
+		$(`#today_data_${bistro} div:nth-child(${num2}) p`).text("오늘은 학식이 없습니다.");
+	}
 }
 
-$("#sendForm input:hidden[name=START_DAY]").val(today.getFullYear() + '/' + ('0' + (today.getMonth() + 1)).slice(-2) + '/' + ('0' + (today.getDate())).slice(-2));
-fn_list();
+let inputDate = today.getFullYear() + '/' + ('0' + (today.getMonth() + 1)).slice(-2) + '/' + ('0' + (today.getDate())).slice(-2);
 
+$("#sendForm input:hidden[name=START_DAY]").val(inputDate);
+fn_list();
 $("#sendForm input:hidden[name=BISTRO_SEQ]").val(2);
 fn_list();
+
 
 const headerEl = document.querySelector("header");
 
