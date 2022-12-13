@@ -142,8 +142,22 @@ main h1 {
 aside {
     margin-left: 70px;
     width: 25%;
-    height: 570px;
+    height: 570px;;
+}
+
+.ranking {
+    width: 100%;
     background-color: #f1f2f7;
+}
+
+.ranking ul li {
+    padding: 20px;
+}
+
+.ranking ul li:nth-child(2n - 1){
+    border-collapse: collapse;
+    border-top: 2px solid #9f9f9f;
+    border-bottom: 2px solid #9f9f9f;
 }
 
 aside h2 {
