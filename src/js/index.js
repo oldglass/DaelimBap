@@ -7,18 +7,15 @@ let inputDate = today.getFullYear() + '.' + ('0' + (today.getMonth() + 1)).slice
 function fn_list() {
 	$.ajax({
 		type: "POST",
-		url: "https://cors-anywhere.herokuapp.com/https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do",
+		url: "https://proxy.cors.sh/https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do",
 		data: $("#sendForm").serialize(),
 		dataType: "json",
 		success: function(response) {
 			if(response != null && response != "") {
-				console.log(response.data.BISTRO_SEQ);
 				if (response.data.BISTRO_SEQ == 1) {
 					for (let i = 0; i < 5; i++) {
-						console.log(i);
 						setTableData(response.data, response.data.BISTRO_SEQ, num_list[i], i + 1, -1);
 						setTableData(response.data, response.data.BISTRO_SEQ, num_list[i], i + 1, today.getDay());
-						console.log("end");
 					}
 					
 				} else if (response.data.BISTRO_SEQ == 2) {
