@@ -194,11 +194,15 @@ function setTableData(data, bistro, num, num2, day) {
     if (day == -1) {
         for (let i = 1; i <= 5; i++) {
             let foodData = eval(`data.CCT${i}${num}`);
+	    if (foodData != null) {
             $(`#weekend_data_${bistro} tr:nth-child(${num2}) td:nth-child(${i + 1})`).html(foodData.replace(/\n/g,"<br>"));
+	    }
         }
     } else if (day >= 1 && day <=5) {
         let foodData = eval(`data.CCT${day}${num}`);
+	if (foodData != null) {
         $(`#today_data_${bistro} div:nth-child(${num2}) p`).html(foodData.replace(/\n/g,"<br>"));
+	}
     } else {
 		$(`#today_data_${bistro} div:nth-child(${num2}) p`).text("오늘은 학식이 없습니다.");
 	}
