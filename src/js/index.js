@@ -37,7 +37,7 @@ function setTableData(data, bistro, num, num2, day) {
         for (let i = 1; i <= 5; i++) {
             let foodData = eval(`data.CCT${i}${num}`);
 			if (foodData != null) {
-            	$(`#weekend_data_${bistro} tr:nth-child(${num2}) td:nth-child(${i + 1})`).html(foodData);
+            	$(`#weekend_data_${bistro} tr:nth-child(${num2}) td:nth-child(${i + 1})`).html(foodData.replace(/\n/g,"<br>"));
 			}
         }
     } else if (day >= 1 && day <=5) {
