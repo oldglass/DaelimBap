@@ -2,7 +2,7 @@ let today = new Date();
 let num_list =[1, 3, 6, 7, 9];
 let inputDate = today.getFullYear() + '.' + ('0' + (today.getMonth() + 1)).slice(-2) + '.' + ('0' + (today.getDate())).slice(-2);
 
-const url = 'https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do'
+//const url = 'https://www.daelim.ac.kr/ajaxf/FrBistroSvc/BistroCarteInfo.do'
 
 function fn_list() {
 	$.ajax({
