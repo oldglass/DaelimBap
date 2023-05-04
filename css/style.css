@@ -64,7 +64,6 @@ main h1 {
     padding-top: 75px;
     display: flex;
     justify-content: center;
-    height: 600px;
 }
 
 .main-container {
@@ -81,6 +80,7 @@ main h1 {
     padding: 15px 25px;
     text-align: center;
     background-color: #f1f2f7;
+    margin-bottom: 20px;
 }
 
 .main-container label:hover {
@@ -107,7 +107,7 @@ main h1 {
     width: 100%;
 }
 
-#main_student:checked ~ #today_data_1{
+#main_student:checked ~ #today_data_1 {
     display: flex;
     flex-wrap: wrap;
 }
@@ -116,48 +116,39 @@ main h1 {
     display: flex
 }
 
-.main-mainmenu, .main-sidemenu, .main-staffmenu {
-    padding: 20px;
-}
-
-.main-mainmenu b, .main-staffmenu b {
-    font-size: 1.5rem;
-}
-
-.main-mainmenu, .main-staffmenu {
-    margin-top: 20px;
+.main-breakfastmenu, .main-mainmenu, .main-sidemenu, .main-staffmenu {
+    padding: 20px 0;
     text-align: center;
+}
+
+.main-breakfastmenu, .main-mainmenu {
+    flex: 1 1 33%;
+    border-top: 1.5px solid #9f9f9f;
+    border-bottom: 1.5px solid #9f9f9f;
+    font-size: 1.15rem;
+}
+
+.main-breakfastmenu b, .main-mainmenu b, .main-staffmenu b {
+    font-size: 1.35rem;
+}
+
+.main-staffmenu {
     flex: 1 1 50%;
-    border-top: 2px solid #9f9f9f;
-    border-bottom: 2px solid #9f9f9f;
-    font-size: 1.25rem;
+    border-top: 1.5px solid #9f9f9f;
+    border-bottom: 1.5px solid #9f9f9f;
+    font-size: 1.15rem;
 }
 
 .main-sidemenu {
-    text-align: center;
     flex: 1 1 33%;
-    border-bottom: 2px solid #9f9f9f;
+    border-bottom: 1.5px solid #9f9f9f;
 }
 
 aside {
     margin-left: 70px;
     width: 25%;
-    height: 570px;;
-}
-
-.ranking {
-    width: 100%;
-    background-color: #f1f2f7;
-}
-
-.ranking ul li {
-    padding: 20px;
-}
-
-.ranking ul li:nth-child(2n - 1){
-    border-collapse: collapse;
-    border-top: 2px solid #9f9f9f;
-    border-bottom: 2px solid #9f9f9f;
+    height: 500px;
+    margin-bottom: 50px;
 }
 
 aside h2 {
@@ -165,11 +156,27 @@ aside h2 {
     padding: 30px;
 }
 
+.aside-container {
+    height: 100%;
+    background-color: #f1f2f7;
+}
+
+.ranking {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.ranking h1 {
+    margin: 0 auto;
+    text-align: center;
+}
+
 section {
     padding-top: 75px;
     margin: 0 auto;
     width: 80%;
-    height: 900px;
+    height: 1000px;
 }
 
 section h1 {
@@ -234,8 +241,8 @@ section h1 {
 
 .weekend-table th, .weekend-table td {
     border-collapse: collapse;
-    border-top: 2px solid #9f9f9f;
-    border-bottom: 2px solid #9f9f9f;
+    border-top: 1.5px solid #9f9f9f;
+    border-bottom: 1.5px solid #9f9f9f;
     padding: 15px;
 }
 
