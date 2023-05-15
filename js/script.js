@@ -174,7 +174,7 @@ function fn_list() {
 		type: "POST",
 		url: "https://proxy.cors.sh/" + data_url,
 		// url: data_url,
-		data: $("#sendForm").serialize(),	
+		data: $("#sendForm").serialize(),
 		dataType: "json",
 		success: function(response) {
 			if(response != null && response != "") {
@@ -191,6 +191,14 @@ function fn_list() {
 					}
 				}
 			}
+		},
+		error: function(response) {
+			for (let i = 0; i < num_list.length; i++) {
+				setTableData(response.data, 1, num_list[i], i + 1, 0);
+			}
+			for (let i = 1; i <= 2; i++) {
+				setTableData(response.data, 2, i, i, 0);
+			}
 		}
 	})
 }
@@ -206,34 +214,23 @@ function setTableData(data, bistro, num, num2, day) {
     } else if (day >= 1 && day <=5) {
         let foodData = eval(`data.CCT${day}${num}`);
 		if (foodData != null) {
-        $(`#today_data_${bistro} div:nth-child(${num2}) p`).html(foodData.replace(/\n/g,"<br>"));
+        	$(`#today_data_${bistro} div:nth-child(${num2}) p`).html(foodData.replace(/\n/g,"<br>"));
 		}
-    } else {
+    } else if (day == 0) {
+		for (let i = 1; i <= 5; i++) {
+			$(`#weekend_data_${bistro} tr:nth-child(${num2}) td:nth-child(${i + 1})`).text("데이터를 가져오지 못했습니다.");
+        }
+		$(`#today_data_${bistro} div:nth-child(${num2}) p`).text("데이터를 가져오지 못했습니다.");
+	}
+	else {
 		$(`#today_data_${bistro} div:nth-child(${num2}) p`).text("오늘은 학식이 없습니다.");
 	}
 }
 
-
 $("#sendForm input:hidden[name=START_DAY]").val(inputDate);
-fn_list();
+fn_list(); 
 $("#sendForm input:hidden[name=BISTRO_SEQ]").val(2);
 fn_list();
-
-/* const headerEl = document.querySelector("header");
-
-window.addEventListener('scroll', function() {
-    requestAnimationFrame(scrollCheck);
-});
-
-function scrollCheck() {
-    let browerScrollY = window.scrollY ? window.scrollY : window.pageYOffset;
-
-    if (browerScrollY > 0) {
-        headerEl.classList.add("active");
-    } else {
-        headerEl.classList.remove("active");
-    }
-} */
 
 const animationMove = function(selector) {
     const targetEl = document.querySelector(selector);
